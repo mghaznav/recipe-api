@@ -8,11 +8,11 @@ from django.contrib.auth.models import (
 
 class UserManager(BaseUserManager):
 
-    def create_user(self, email, password = None, **extrafields):
+    def create_user(self, email, password=None, **extrafields):
         if not email:
             raise ValueError('Email address is required to create a new User.')
 
-        user = self.model(email = self.normalize_email(email), **extrafields)
+        user = self.model(email=self.normalize_email(email), **extrafields)
         user.set_password(password)
         user.save(using=self._db)
 
@@ -26,6 +26,7 @@ class UserManager(BaseUserManager):
         superuser.save(using=self._db)
 
         return superuser
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
