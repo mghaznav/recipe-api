@@ -2,11 +2,11 @@ from unittest.mock import patch
 
 from django.core.management import call_command
 from django.db.utils import OperationalError # noqa
-from django.test import TestCase
+from django.test import SimpleTestCase
 
 
 @patch('django.db.backends.postgresql.base.DatabaseWrapper.ensure_connection')
-class CommandTests(TestCase):
+class CommandTests(SimpleTestCase):
 
     def test_wait_for_db_ready(self, patched_conn):
         patched_conn.return_value = True
